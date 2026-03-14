@@ -301,6 +301,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ========== Product Enquiry (WhatsApp) ==========
+    const enquireBtns = document.querySelectorAll('.product-enquiry, .action-btn[title="Enquire Now"]');
+    enquireBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = btn.closest('.product-card');
+            if (card) {
+                const productName = card.querySelector('.product-name').textContent;
+                const productPrice = card.querySelector('.price-current').textContent;
+                
+                let whatsappMsg = `Hi Wood Craft! 👋\n\nI am interested in your product:\n*${productName}*\nPrice: ${productPrice}\n\nPlease share more details.`;
+                const encodedMsg = encodeURIComponent(whatsappMsg);
+                window.open(`https://wa.me/919773649903?text=${encodedMsg}`, '_blank');
+            } else {
+                window.open('https://wa.me/919773649903', '_blank');
+            }
+        });
+    });
+
     // ========== Smooth Scroll for all anchor links ==========
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
